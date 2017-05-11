@@ -27,9 +27,7 @@
 					<li class="community li-with-bullet"><a href="{% url 'communities:single' slug=other_community.slug %}">{{ other_community.name }}</a></li>
 				{% endfor %}
 			</ul>
-			{% if user.is_authenticated %}
-			<a href="{% url 'communities:create' %}" class="btn btn-sm btn-fill btn-danger"><span class="glyphicon glyphicon-plus-sign"></span> New community</a>
-			{% endif %}
+
 		</div>
 	</div>
 </div>

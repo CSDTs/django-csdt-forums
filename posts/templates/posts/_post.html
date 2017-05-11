@@ -1,9 +1,11 @@
 {% load humanize %}
 {% load static from staticfiles %}
+{% if post.user.is_active %}
 <div class="post media">
 	<a class="pull-left" href="{% url 'posts:for_user' username=post.user.username %}">
 		<div class="avatar">
-			<img class="media-object" src="{% static 'img/icons/avatar.png' %}" alt="{{ post.user.username }} avatar">
+			<img class="media-object" src="{% if post.user.avatar %}{{ post.user.avatar.url }}{% else %}
+			{% static 'img/icons/avatar.png' %}{% endif %}" alt="{{ post.user.username }} avatar">
 		</div>
 	</a>
 	<div class="media-body">
@@ -23,6 +25,13 @@
 					<span class="text-danger icon-label">delete</span>
 				</a>
 			{% endif %}
+			{% if user.is_superuser and not post.user == user %}
+				<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
+					<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					<span class="text-danger icon-label">MODS: delete post</span>
+				</a>
+			{% endif %}
 		</div>
 	</div>
 </div>
+{% endif %}
