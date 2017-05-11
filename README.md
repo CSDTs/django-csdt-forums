@@ -1,8 +1,8 @@
 # forums
 Forums app for CSDT, based on Treehouse's MSG app developed by Kenneth Love for their Django Authentication tutorial.
 ```
-cffi==1.7.0
-Django==1.9.9
+cffi
+Django
 django-allauth
 django-analytical
 django-attachments
