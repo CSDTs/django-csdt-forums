@@ -1,0 +1,13 @@
+workspace/
+eclipse/
+*~
+~*
+*.swp
+*.bak
+*.pyc
+*.sqlite3
+.idea/**
+python/
+media/
+collected_static/
+local_settings.py
