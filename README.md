@@ -1,5 +1,23 @@
 # forums
 Forums app for CSDT, based on Treehouse's MSG app developed by Kenneth Love for their Django Authentication tutorial.
+
+Quick start
+-----------
+
+1. Add "forums" to your INSTALLED_APPS setting like this::
+
+    INSTALLED_APPS = [
+        ...
+        'forums',
+    ]
+
+2. Include the forums URLconf in your project urls.py like this::
+
+    url(r'^forums/', include('forums.urls')),
+
+3. Run `python manage.py migrate` to create the forums models.
+
+
 ```
 cffi
 Django
