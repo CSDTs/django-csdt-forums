@@ -4,6 +4,15 @@ from setuptools import find_packages, setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
+    
+    
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+def read_requirements(fname):
+    f = open(os.path.join(os.path.dirname(__file__), fname))
+    return filter(lambda f: f != '', map(lambda f: f.strip(), f.readlines()))
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
@@ -15,6 +24,7 @@ setup(
     include_package_data=True,
     license='BSD License',  # example license
     description='A simple Django forums.',
+    long_description=read('README.md'),
     install_requires = read_requirements('libraries.txt'),
     url='https://csdt.rpi.edu/',
     author='Ryan Holm',
