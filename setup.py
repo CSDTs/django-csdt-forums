@@ -14,7 +14,7 @@ setup(
     include_package_data=True,
     license='BSD License',  # example license
     description='A simple Django forums.',
-    long_description=read(README.md),
+    long_description=read('README.md'),
     install_requires = read_requirements('libraries.txt'),
     url='https://csdt.rpi.edu/',
     author='Ryan Holm',
