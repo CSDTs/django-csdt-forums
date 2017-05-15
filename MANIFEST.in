@@ -1,4 +1,5 @@
 recursive-include accounts/templates/ *.*
 recursive-include communities/templates *.*
 recursive-include posts/templates *.*
+recursive-include assets/ *.*
 include README.md libraries.txt
