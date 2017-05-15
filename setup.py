@@ -1,6 +1,7 @@
 import os, sys
 from setuptools import find_packages, setup
 
+
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
@@ -14,7 +15,6 @@ setup(
     include_package_data=True,
     license='BSD License',  # example license
     description='A simple Django forums.',
-    long_description=read('README.md'),
     install_requires = read_requirements('libraries.txt'),
     url='https://csdt.rpi.edu/',
     author='Ryan Holm',
