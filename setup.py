@@ -1,4 +1,4 @@
-import os
+import os, sys
 from setuptools import find_packages, setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
