@@ -1,0 +1,56 @@
+{% extends "communities/layout.html" %}
+{% load community_tags %}
+
+{% block pre_community_content %}
+<div class="col-md-4">
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">{{ community.name }}</h5>
+			{{ community.description_html|safe }}
+			{% community_buttons community %}
+		</div>
+		{% if user.is_superuser  %}
+			<a href="{% url 'communities:delete' slug=community.slug %}" title="delete" class="btn btn-simple">
+				<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+				<span class="text-danger icon-label">MODS: delete {{ community.name }}</span>
+			</a>
+		{% endif %}
+	</div>
+    
+  <div class="card card-with-shadow">
+   	 <div class="content">
+   		 <h5 class="title">Members</h5>
+   		 <ul class="list-unstyled">
+   			 {% for membership in community.good_members %}
+			 {% if membership.user.is_active %}
+   			 <li class="row">
+   				 <a href="{% url 'posts:for_user' username=membership.user.username %}" class="col-md-9">{{ membership.user.username }}</a>
+   				 <div class="col-md-3 text-right">
+   					 {% if user.id in community.admins or user.id in community.moderators %}
+   					 {% if membership.user.id in community.moderators %}
+   					 <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=1 %}"><i class="glyphicon glyphicon-thumbs-down text-warning"></i></a>
+   					 {% endif %}
+   					 {% if membership.user.id not in community.moderators and membership.user.id not in community.admins %}
+   					 <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=2 %}"><i class="glyphicon glyphicon-thumbs-up text-warning"></i></a>
+   					 {% endif %}
+
+   					 <a href="{% url 'communities:change_status' slug=community.slug user_id=membership.user.id status=0 %}"><i class="glyphicon glyphicon-ban-circle text-danger"></i></a>
+
+   					 {% endif %}
+   				 </div>
+   			 </li>
+			 {% endif %}
+   			 {% endfor %}
+   		 </ul>
+   	 </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block community_content %}
+<div class="col-md-8">
+	{% for post in community.posts.all %}
+		{% include "posts/_post.html" %}
+	{% endfor %}
+</div>
+{% endblock %}

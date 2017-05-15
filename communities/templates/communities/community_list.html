@@ -1,0 +1,51 @@
+{% extends "communities/layout.html" %}
+
+{% block pre_community_content %}
+<div class="col-md-4">
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">Communities</h5>
+			<p>MSG communities are a great place to find other people that share your passions! Make friends, learn tips &amp; tricks, and more!</p>
+			{% if user.is_authenticated %}
+			<a href="{% url 'communities:create' %}" class="btn btn-sm btn-fill btn-danger"><span class="glyphicon glyphicon-plus-sign"></span> New community</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block community_content %}
+<div class="col-md-8">
+	<div class="list-group">
+		{% for community in object_list %}
+		<a class="list-group-item container-fluid" href="{% url 'communities:single' slug=community.slug %}">
+			<h5 class="title list-group-item-heading">{{ community.name }} </h5>
+			<div class="list-group-item-text container-fluid">
+				{{ community.description_html|safe }}
+
+				<div class="row">
+					<div class="col-md-4">
+						<span class="badge">{{ community.members.count }}</span> member{{ community.members.count|pluralize }}
+					</div>
+					<div class="col-md-4">
+						<span class="badge">{{ community.posts.count }}</span> post{{ community.posts.count|pluralize }}
+					</div>
+					<div class="col-md-4">
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</a>
+		{% if user.is_superuser  %}
+						<a href="{% url 'communities:delete' slug=community.slug %}" title="delete" class="btn btn-simple">
+							<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+							<span class="text-danger icon-label">MODS: delete {{ community.name }}</span>
+						</a>
+						{% endif %}
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
