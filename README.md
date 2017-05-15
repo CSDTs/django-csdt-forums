@@ -16,13 +16,13 @@ Quick start
 
 2. Include the forums URLconf in your project urls.py like this::
 
-    ```python
+    
     url(r'^accounts/', include('accounts.urls', namespace="accounts")),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r"^posts/", include("posts.urls", namespace="posts")),
     url(r"^communities/",
         include("communities.urls", namespace="communities")),
-```
+
 
 3. Run `python manage.py migrate` to create the forums models.
 ```
