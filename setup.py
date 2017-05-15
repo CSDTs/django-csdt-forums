@@ -16,7 +16,6 @@ setup(
     description='A simple Django forums.',
     long_description=read(README.md),
     install_requires = read_requirements('libraries.txt'),
-    include_package_data=True,
     url='https://csdt.rpi.edu/',
     author='Ryan Holm',
     author_email='holmr@rpi.edu',
