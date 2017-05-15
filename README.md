@@ -27,29 +27,6 @@ Quick start
 3. Run `python manage.py migrate` to create the forums models.
 ```
 
-```
-cffi
-Django
-django-allauth
-django-analytical
-django-attachments
-
-django-bootstrap3
-django-braces
-django_compressor
-django-extra-views
-django-sekizai
-django-taggit
-django-taggit-templatetags2
-misaka
-pillow
-psycopg2
-pycparser
-python-resize-image
-sorl-thumbnail
-sqlparse
-twitter-text-python
-```
 
 
 I have this as the settings.py addendum, will have to change depending on your setup:
