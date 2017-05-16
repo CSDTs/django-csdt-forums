@@ -1,6 +1,12 @@
 # forums
 Forums app for CSDT, based on Treehouse's MSG app developed by Kenneth Love for their Django Authentication tutorial, Logo and default avatar icons from [icons8](https://icons8.com/web-app/category/all/Messaging) and Theme from [Creative Tim](http://www.creative-tim.com/product/paper-kit).
 
+
+# Please note:
+required libffi-dev on server:
+```sudo apt-get install libffi-dev
+```
+
 Quick start
 -----------
 ```
