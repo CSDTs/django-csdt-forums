@@ -3,8 +3,9 @@ Forums app for CSDT, based on Treehouse's MSG app developed by Kenneth Love for 
 
 
 # Please note:
-required libffi-dev on server:
-```sudo apt-get install libffi-dev
+Requires libffi-dev on server:
+```
+sudo apt-get install libffi-dev
 ```
 
 Quick start
