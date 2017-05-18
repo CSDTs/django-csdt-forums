@@ -22,7 +22,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
         if not display_name:
             display_name = username
-        if not User.objects.filter(user__username__iexact=username).exists():
+        if not User.objects.filter(account__username__iexact=username).exists():
             user = self.model(
                 email=self.normalize_email(email),
                 username=username,
@@ -60,8 +60,8 @@ class FileField(models.FileField):
         super(FileField, self).save_form_data(instance, data)
 
 
-class User(PermissionsMixin):
-    user = models.ForeignKey(
+class User(models.Model):
+    account = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
@@ -77,13 +77,13 @@ class User(PermissionsMixin):
     REQUIRED_FIELDS = ["display_name", "username"]
     
     def __str__(self):
-        return "@{}".format(self.username)
+        return "@{}".format(self.account.username)
     
     def get_short_name(self):
         return self.display_name
     
     def get_long_name(self):
-        return "{} (@{})".format(self.display_name, self.username)
+        return "{} (@{})".format(self.display_name, self.account.username)
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
