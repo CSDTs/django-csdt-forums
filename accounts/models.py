@@ -22,6 +22,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
         if not display_name:
             display_name = username
+        #AUTH_CHANGES included account__
         if not User.objects.filter(account__username__iexact=username).exists():
             user = self.model(
                 email=self.normalize_email(email),
