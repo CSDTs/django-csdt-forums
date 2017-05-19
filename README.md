@@ -15,6 +15,7 @@ Quick start
 
     INSTALLED_APPS = [
         ...
+        'bootstrap3',
         'accounts',
         'communities',
         'posts',
