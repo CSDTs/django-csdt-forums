@@ -128,7 +128,7 @@
                     <div id="navbar" class="collapse navbar-collapse">
                       <ul class="nav navbar-nav">
                         <li><a href="{% url 'project-list' %}">Projects</a></li>
-                        <li><a href="{% url 'csdt_msg' %}">Forums</a></li>
+                        <li><a href="{% url 'posts:all' %}">Forums</a></li>
                         <li><a href="{% url 'guides:all' %}">Guides</a></li>
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>

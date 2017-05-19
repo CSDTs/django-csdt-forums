@@ -36,7 +36,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand navbar2-brand" href="{% url 'csdt_msg' %}">
+					<a class="navbar-brand navbar2-brand" href="{% url 'posts: all' %}">
 						<div class="logo-container">
 							<div class="logo"><img src="{% static 'img/icons/logo.png' %}"></div>
 							<p class="brand">CSDT_MSG</p>
@@ -50,7 +50,7 @@
 						{% if user.is_authenticated %}
 
 						<li><a href="#" class="btn btn-default btn-fill" data-toggle="modal" data-target="#postModal">Post</a></li>
-						<li><a href="{% url 'csdt_msg' %}" class="btn btn-warning btn-fill">Posts</a></li>
+						<li><a href="{% url 'posts:all' %}" class="btn btn-warning btn-fill">Posts</a></li>
 						<li><a href="{% url 'communities:list' %}" class="btn btn-warning btn-fill">Communities</a></li>
 
 						{% else %}
