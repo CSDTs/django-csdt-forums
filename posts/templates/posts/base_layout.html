@@ -16,13 +16,11 @@
 
 		<!-- stylesheets -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'posts/css/ct-paper.css' %}">
-		<link rel="stylesheet" href="{% static 'posts/css/msg.css' %}">
+		<link rel="stylesheet" href="{% static 'css/ct-paper.css' %}">
 		<link rel="stylesheet" href="{% static 'css/msg.css' %}">
-		<link rel="stylesheet" href="{{STATIC_URL}}posts/css/msg.css">
-		<link rel="stylesheet" href="{{STATIC_URL}}posts/static/css/msg.css">
-		<link rel="stylesheet" href="{{STATIC_URL}}posts/static/posts/css/msg.css">
-		<link rel="stylesheet" href="{{STATIC_URL}}css/msg.css}">
+		<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+		<link rel="stylesheet" href="{% static 'css/examples.css' %}">
+
 		<link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
 	</head>
 	<body>
@@ -42,7 +40,7 @@
 
 					<a class="navbar-brand navbar2-brand" href="{% url 'csdt_msg' %}">
 						<div class="logo-container">
-							<div class="logo"><img src="{{ STATIC_URL }}img/icons/logo.png' %}"></div>
+							<div class="logo"><img src="{% static 'img/icons/logo.png' %}"></div>
 							<p class="brand">CSDT_MSG</p>
 						</div>
 					</a>
@@ -98,11 +96,11 @@
 		  crossorigin="anonymous"></script>
 
 		<!--  Plugins -->
-		<script src="{{ STATIC_URL }}js/ct-paper-checkbox.js"></script>
-		<script src="{{ STATIC_URL }}js/ct-paper-radio.js"></script>
-		<script src="{{ STATIC_URL }}js/bootstrap-select.js"></script>
-		<script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+		<script src="{% static 'js/ct-paper-checkbox.js' %}"></script>
+		<script src="{% static 'js/ct-paper-radio.js' %}"></script>
+		<script src="{% static 'js/bootstrap-select.js' %}"></script>
+		<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
 
-		<script src="{{ STATIC_URL }}js/ct-paper.js"></script>
+		<script src="{% static 'js/ct-paper.js' %}"></script>
 	</body>
 </html>
