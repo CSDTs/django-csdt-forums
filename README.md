@@ -8,6 +8,8 @@ Requires libffi-dev on server:
 sudo apt-get install libffi-dev
 ```
 
+It also requires Python 3.x.
+
 Quick start
 -----------
 ```
