@@ -16,6 +16,9 @@ from braces.views import PrefetchRelatedMixin, SelectRelatedMixin
 from . import models
 
 
+""" needs to get user from somewhere """
+
+
 class CreateCommunity(LoginRequiredMixin, generic.CreateView):
     fields = ("name", "description")
     model = models.Community
@@ -111,22 +114,22 @@ class ChangeStatus(
     generic.RedirectView
 ):
     permission_required = "communities.ban_member"
-    
+
     def has_permission(self):
         return any([
             super().has_permission(),
             self.request.user.id in self.get_object().admins
         ])
-    
+
     def get_object(self):
         return get_object_or_404(
             models.Community,
             slug=self.kwargs.get("slug")
         )
-    
+
     def get_redirect_url(self, *args, **kwargs):
         return self.get_object().get_absolute_url()
-    
+
     def get(self, request, *args, **kwargs):
         role = int(self.kwargs.get("status"))
         membership = get_object_or_404(
@@ -154,7 +157,7 @@ class ChangeStatus(
                     "You've been banned from the group!"
                 )
 
-        
+
         try:
             moderators = Group.objects.get(name__iexact="moderators")
         except Group.DoesNotExist:
@@ -163,17 +166,17 @@ class ChangeStatus(
                 # Global_Bug: What is this?
                 Permissions.objects.get(codename="ban_members")
             )
-        
+
         if role in [2, 3]:
             membership.user.groups.add(moderators)
         else:
             membership.user.groups.remove(moderators)
-        
+
         messages.success(request, "@{} is now {}".format(
             membership.user.username,
             membership.get_role_display()
         ))
-        
+
         return super().get(request, *args, **kwargs)
 
 
@@ -207,3 +210,66 @@ class DeleteCommunity(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView
 
         messages.success(self.request, "Message successfully deleted")
         return super().delete(*args, **kwargs)
+
+
+class DeleteUser(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
+    model = models.User
+    select_related = ("user")
+    success_url = reverse_lazy("posts:all")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user_id=self.request.user.id)
+
+    def get_object(self, queryset=None):
+        if self.request.user.is_superuser:
+            pk = self.kwargs.get(self.pk_url_kwarg, None)
+            queryset = models.User.objects.filter(id=pk)
+            try:
+                obj = queryset.get()
+            except models.User.ObjectDoesNotExist:
+                raise Http404(_(u"No %(verbose_name)s found matching the query") %
+                              {'verbose_name': queryset.model._meta.verbose_name})
+            return obj
+        else:
+            pk = self.kwargs.get(self.pk_url_kwarg, None)
+            try:
+                queryset = models.User.objects.filter(user_id=self.request.user.id,pk=pk)
+            except models.User.ObjectDoesNotExist:
+                raise Http404(_(u"Not a mod, can't delete other's accounts"))
+            else:
+                try:
+                    obj = queryset.get()
+                except models.User.ObjectDoesNotExist:
+                    raise Http404(_(u"No %(verbose_name)s found matching the query") %
+                                  {'verbose_name': queryset.model._meta.verbose_name})
+                return obj
+
+    def delete(self, *args, **kwargs):
+        if self.request.user.is_superuser:
+            self.object = self.get_object()
+            self.object.is_active = False
+            communities = Community.objects.filter(members=self.object.id)
+            for community in communities:
+                try:
+                    membership = CommunityMember.objects.filter(
+                        user=self.object.id,
+                        community__slug=community.slug
+                    ).get()
+
+                except CommunityMember.DoesNotExist:
+                    messages.warning(
+                        self.request,
+                        "You can't leave this group."
+                    )
+                else:
+                    membership.delete()
+                    messages.success(
+                        self.request,
+                        "{} has been hellbanned!".format(self.object.username)
+                    )
+            self.object.save()
+            return HttpResponseRedirect(self.get_success_url())
+
+        else:
+            raise Http404(_(u"Not a mod, can't delete other's accounts"))
