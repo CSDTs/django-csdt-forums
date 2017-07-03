@@ -7,7 +7,7 @@
 	<a class="pull-left" href="{% url 'posts:for_user' username=post.user.username %}">
 		<div class="avatar">
 			<img class="media-object" src="{% if post.user.avatar %}{{ post.user.avatar.url }}{% else %}
-			{% static 'img/icons/avatar.png' %}{% endif %}" alt="{{ post.user.username }} avatar">
+			{% static 'post/img/icons/avatar.png' %}{% endif %}" alt="{{ post.user.username }} avatar">
 		</div>
 	</a>
 	<div class="media-body">
