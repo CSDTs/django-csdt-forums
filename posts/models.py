@@ -102,7 +102,7 @@ class Post(models.Model):
                 )
 
 
-        .DoesNotExist:
+        except DoesNotExist:
                 pass
 
 
