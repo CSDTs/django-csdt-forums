@@ -32,6 +32,7 @@ class UserCreateForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields["username"].label = "Display name"
         self.fields["email"].label = "Email address"
+        self.fields["bio"].label = "Bio"
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
@@ -49,6 +50,7 @@ class UserCreateForm(UserCreationForm):
 
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
+        user.bio = self.cleaned_data['bio']
         if commit:
             user.save()
 
