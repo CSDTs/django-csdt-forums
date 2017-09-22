@@ -6,7 +6,7 @@
 	<h4><strong>@{{ post_user.username }}</strong></h4>
     Bio: {{ post_user.bio }}<br>
 	{% if user.is_superuser and not post_user == user %}
-			<a href="{% url 'accounts:delete' pk=post_user.pk %}" title="delete" class="btn btn-simple">
+			<a href="{% url 'communities:deleteUser' pk=post_user.pk %}" title="delete" class="btn btn-simple">
 				<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
 				<span class="text-danger icon-label">MODS: permaban</span>
 			</a>

@@ -30,4 +30,9 @@ urlpatterns = [
         views.DeleteCommunity.as_view(),
         name="delete"
     ),
+    url(
+        r"deleteUser/(?P<pk>[-\w]+)/$",
+        views.DeleteUser.as_view(),
+        name="deleteUser"
+    ),
 ]
