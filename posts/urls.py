@@ -20,4 +20,14 @@ urlpatterns = [
         views.DeletePost.as_view(),
         name="delete"
     ),
+    url(
+        r"signup/$",
+        views.SignUp.as_view(),
+        name="signup"
+    ),
+    url(
+        r"login/$",
+        views.LoginView.as_view(),
+        name="login"
+    ),
 ]
