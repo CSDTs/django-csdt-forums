@@ -12,10 +12,10 @@ from django.views import generic
 
 from braces.views import PrefetchRelatedMixin, SelectRelatedMixin
 
-
+from django.contrib.auth import get_user_model
 from . import models
 
-
+User = get_user_model()
 """ needs to get user from somewhere """
 
 
@@ -211,9 +211,9 @@ class DeleteCommunity(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView
         messages.success(self.request, "Message successfully deleted")
         return super().delete(*args, **kwargs)
 
-
+# Added from accounts, so need to fix models.User
 class DeleteUser(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
-    model = models.User
+    model = User
     select_related = ("user")
     success_url = reverse_lazy("posts:all")
 
@@ -224,23 +224,23 @@ class DeleteUser(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     def get_object(self, queryset=None):
         if self.request.user.is_superuser:
             pk = self.kwargs.get(self.pk_url_kwarg, None)
-            queryset = models.User.objects.filter(id=pk)
+            queryset = User.objects.filter(id=pk)
             try:
                 obj = queryset.get()
-            except models.User.ObjectDoesNotExist:
+            except User.ObjectDoesNotExist:
                 raise Http404(_(u"No %(verbose_name)s found matching the query") %
                               {'verbose_name': queryset.model._meta.verbose_name})
             return obj
         else:
             pk = self.kwargs.get(self.pk_url_kwarg, None)
             try:
-                queryset = models.User.objects.filter(user_id=self.request.user.id,pk=pk)
-            except models.User.ObjectDoesNotExist:
+                queryset = User.objects.filter(user_id=self.request.user.id,pk=pk)
+            except User.ObjectDoesNotExist:
                 raise Http404(_(u"Not a mod, can't delete other's accounts"))
             else:
                 try:
                     obj = queryset.get()
-                except models.User.ObjectDoesNotExist:
+                except User.ObjectDoesNotExist:
                     raise Http404(_(u"No %(verbose_name)s found matching the query") %
                                   {'verbose_name': queryset.model._meta.verbose_name})
                 return obj

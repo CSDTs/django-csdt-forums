@@ -8,7 +8,7 @@ import re
 import time
 
 from communities.models import Community
-from accounts.models import User
+
 
 
 
@@ -84,7 +84,7 @@ class Post(models.Model):
         for atted in referenced:
             print("atted:",atted)
             try:
-                person = User.objects.get(username=atted)
+            .objects.get(username=atted)
                 if atted == self_name:
                     continue
                 try:
@@ -102,7 +102,7 @@ class Post(models.Model):
                 )
 
 
-            except User.DoesNotExist:
+        .DoesNotExist:
                 pass
 
 
