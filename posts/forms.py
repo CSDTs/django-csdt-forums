@@ -25,7 +25,7 @@ class PostForm(forms.ModelForm):
 
 class UserCreateForm(UserCreationForm):
     class Meta:
-        fields = ("username", "email", "bio", "password1", "password2")
+        fields = ("username", "email", "password1", "password2")
         model = get_user_model()
 
     def __init__(self, *args, **kwargs):
