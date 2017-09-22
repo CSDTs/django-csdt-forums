@@ -48,7 +48,6 @@ class UserCreateForm(UserCreationForm):
             raise forms.ValidationError(u'Username "%s" is already in use.' % self.cleaned_data['username'])
 
         user.email = self.cleaned_data['email']
-        user.bio = "None"
         user.username = self.cleaned_data['username']
         if commit:
             user.save()
