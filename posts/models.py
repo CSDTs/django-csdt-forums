@@ -84,7 +84,7 @@ class Post(models.Model):
         for atted in referenced:
             print("atted:",atted)
             try:
-            User.objects.get(username=atted)
+                # User.objects.get(username=atted)
                 if atted == self_name:
                     continue
                 try:
