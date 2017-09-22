@@ -49,7 +49,6 @@ class UserCreateForm(UserCreationForm):
 
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
-        user.bio = self.cleaned_data['bio']
         if commit:
             user.save()
 
