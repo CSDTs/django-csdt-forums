@@ -32,7 +32,6 @@ class UserCreateForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields["username"].label = "Display name"
         self.fields["email"].label = "Email address"
-        self.fields["bio"].label = "Bio"
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
