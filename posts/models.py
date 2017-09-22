@@ -102,8 +102,8 @@ class Post(models.Model):
                 )
 
 
-        except DoesNotExist:
-                pass
+            except:
+                    pass
 
 
 
