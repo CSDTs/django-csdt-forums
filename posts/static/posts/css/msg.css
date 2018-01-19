@@ -1239,3 +1239,10 @@ body > .wrapper {
 	height: 50px;
 
 }
+
+@media (min-width: 768px) {
+  .navbar-nav>li>a {
+      padding-top: 0;
+      padding-bottom: 0;
+  }
+}
