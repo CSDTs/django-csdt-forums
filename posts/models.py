@@ -59,7 +59,7 @@ class Post(models.Model):
                         person=person[:-4]
 
                     #deploy: fix link address
-                    replacement = re.sub(r'([A-Za-z]+)',r'<a href="http://127.0.0.1:8000/posts/by/\1/">@\1</a>', person)
+                    replacement = re.sub(r'([A-Za-z]+)',r'<a href="/posts/by/\1/">@\1</a>', person)
                     if row.endswith(ending):
                         row = row[:-(len(person)+5)] + replacement + '</p>'
                         base += row
