@@ -17,6 +17,7 @@ Quick start
 
     INSTALLED_APPS = [
         ...
+        'django.contrib.humanize',
         'bootstrap3',
         'communities',
         'posts',
